@@ -1,15 +1,16 @@
 #include "qglwidget.h"
 
 qglwidget::qglwidget(QWidget *parent)
-    : QOpenGLWidget(parent)
-    , ui(new Ui::qglwidget)
+	: QOpenGLWidget(parent)
+	, ui(new Ui::qglwidget)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
+	ui->openGLWidget->hide();
 }
 
 qglwidget::~qglwidget()
 {
-    delete ui;
+	delete ui;
 }
 
 void qglwidget::initializeGL()
@@ -17,7 +18,7 @@ void qglwidget::initializeGL()
 	// Set up the rendering context, load shaders and other resources, etc.:
 	initializeOpenGLFunctions();
 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-    makeCurrent();
+	makeCurrent();
 
 }
 
@@ -90,26 +91,11 @@ void qglwidget::paintGL()
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//float timeValue = glfwGetTime();
-	//float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
-	//int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-
-	// use shader program to draw 
-	//glUseProgram(shaderProgram);
-
-	//glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-
-	//shaderProgram.use();
-	
 	glUseProgram(shaderProgram);
 
 	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-
-
-	//glDeleteVertexArrays(1, &VAO);
-	//glDeleteBuffers(1, &VBO);
 
 }
